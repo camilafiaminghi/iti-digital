@@ -1,0 +1,48 @@
+extends layout
+
+block content
+	div(class='panel panel-default' ng-controller='PaymentController')
+		div(class='panel-heading text-center')
+			h2(class='h4')=title
+		form(action='/payment' method='post' name='paymentForm')
+			div(class='panel-body text-center')
+
+				div(class='container-fluid pad-md-tb')
+					div(class='form-group clearfix' ng-class='{"has-warning": paymentForm.email.$error.email && !isLoad || paymentForm.email.$error.required && !isLoad}')
+						input(id='email' name='email' type='email' value='' placeholder='To: exemple@example.com' class='form-control' ng-model='payment.email' required)
+						span(class='pull-left' ng-show='!isLoad && paymentForm.email.$error.required') Please, fill out this field.
+						span(class='pull-left' ng-show='!isLoad && paymentForm.email.$error.email') Please, fill out with a valid email.
+						
+					div(class='form-group row')
+						div(class='col-xs-8' ng-class='{"has-warning": paymentForm.amount.$error.required && !isLoad}')
+							input(id='amount' name='amount' type='number' placeholder='Amount: $00.00' class='form-control' ng-model='payment.amount' required)
+							span(class='pull-left' ng-show='!isLoad && paymentForm.amount.$error.required') Please, enter a number.
+
+						div(class='col-xs-4 pull-right')
+							select(id='currency' name='currency' class='form-control' ng-model='payment.currency')
+								each currency, i in currencies
+									option(value='#{currency.name}') #{currency.name}
+
+						
+
+					div(class='form-group')
+						textarea(id='message' name='message' placeholder='Message:' class='form-control' ng-model='payment.message')
+
+					div(class='list-group')
+						label(class='list-group-item btn btn-default' data-radio='cause')
+							input(name='cause' type='radio' value='Sending money to family or friend' class='sr-only' ng-model='payment.cause')
+							span I'm sending money to family or friend
+						label(class='list-group-item btn btn-default' data-radio='cause')
+							input(name='cause' type='radio' value='Paying for goods or services' class='sr-only' ng-model='payment.cause')
+							span I'm paying for goods or services
+					
+			div(class='panel-footer')
+				div(class='container-fluid')
+					button(type='reset' class='btn btn-default pull-left') Clear
+
+					button(type='submit' value='1' name='send' class='btn btn-default pull-right' ng-click='submitForm($event)') Next
+
+
+	div(class='modal-backdrop in' ng-show='showMask')
+		img(src='/img/loader.gif')
+

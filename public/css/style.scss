@@ -1,8 +1,54 @@
+
+@import '_variables';
+@import '../components/bootstrap-sass/assets/stylesheets/bootstrap.scss';
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	width: 100%;
+	height: 100vh;
 }
 
-a {
-  color: #00B7FF;
+.panel-default {
+	height: 100vh;
+	position: relative;
+
+	.panel-footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.panel-heading {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.panel-body {
+		padding: 60px 0 60px 0;
+		height: 100vh;
+		overflow: auto;
+	}
+}
+
+.has-warning {
+	span {
+		color: $state-warning-text;
+	}
+}
+
+/* HELPERS */
+.pad-md-tb {
+	padding-top: 20px; 
+	padding-bottom: 20px; 
+}
+
+.modal-backdrop {
+	> img {
+		position: absolute;
+		top: 45%;
+		left: 45%;
+		display: block;
+	}
 }

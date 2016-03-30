@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	div(class='panel panel-default' ng-controller='PaymentController')
+		div(class='panel-heading text-center')
+			h2(class='h4')=title
+
+		div(class='panel-body text-center')
+			div(class='table-responsive')
+				table(class='table')
+					tbody
+						each payment in payments
+							tr
+								td=payment._id.getTimestamp()
+								td=payment.email
+								td=payment.currency 
+								td=payment.amount
+
+			
+
+		div(class='panel-footer')
+			div(class='container-fluid text-center')
+				a(class='btn btn-default' href='/') Back
+
